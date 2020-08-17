@@ -45,12 +45,12 @@ public class RandomPersonDataAccessService implements IPersonDao {
     }
 
     @Override
-    public int updatePersonById(UUID id, Person person) {
+    public int updatePersonById(UUID id, Person update) {
         return selectPersonById(id)
-                .map(person1 -> {
+                .map(person -> {
                     int indexOfPersonToUpdate = db.indexOf(person);
                     if(indexOfPersonToUpdate >= 0) {
-                        db.set(indexOfPersonToUpdate, person);
+                        db.set(indexOfPersonToUpdate, new Person(id, update.getName()));
                         return 1;
                     }
                     return 0;
